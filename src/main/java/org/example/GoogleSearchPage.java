@@ -2,16 +2,21 @@ package org.example;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
+
 
 public class GoogleSearchPage {
     private WebDriver driver;
 
     private By searchBox = By.name("q");
-    private By searchButton = By.name("btnK");
+    private By searchButton = By.cssSelector("input[name='btnK']:not([style*='display:none'])");
     private By searchResultsContainer = By.id("search");
     private By searchResultsTitles = By.cssSelector("div#search h3");
 
@@ -28,7 +33,9 @@ public class GoogleSearchPage {
     }
 
     public void clickSearch() {
-        driver.findElement(searchButton).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(By.name("btnK")));
+        searchBtn.click();
     }
 
     public boolean isSearchResultsDisplayed() {

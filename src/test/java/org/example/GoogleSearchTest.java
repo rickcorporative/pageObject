@@ -34,6 +34,8 @@ public class GoogleSearchTest {
         googleSearchPage.clickSearch();
 
         Assert.assertTrue(googleSearchPage.isSearchResultsDisplayed(), "Результаты поиска не отображены!");
+
+        System.out.println("The end of the GoogleSearchTest");
     }
 
     // Метод для завершения работы браузера после каждого теста
